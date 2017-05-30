@@ -18,6 +18,7 @@
   "homepage": "https://github.com/looks-like-an-apple-club/team-profile#readme",
   "dependencies": {
     "ejs": "^2.5.6",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "mongoose": "^4.10.4"
   }
 }
