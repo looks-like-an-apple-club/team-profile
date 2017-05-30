@@ -2,29 +2,37 @@
 // Jin keonsu
 //
 
-var boardApi = {
-  var mongoose = require('mongoose');
-  mongoose.connect('mongodb://ds155411.mlab.com:55411');
+// var boardApi = {
+  // var mongoose = require('mongoose');
+  // mongoose.connect('mongodb://ds155411.mlab.com:55411');
+  //
+  // var db = mongoose.connection;
+  // db.on('error', console.error.bind(console, 'connection error:'));
+  // db.once('open', function() {
+  // // we're connected!
+  //   console.log("db connected");
+  // });
+  //
+  // var testSchema = mongoose.Schema({
+  //   count: {type:Number, default: 0},
+  //   data: [{type:Number, default: 0}, {content: String}]
+  // });
+  // var testModel = mongoose.model('jksTest', testSchema);
+// };
 
-  var db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'connection error:'));
-  db.once('open', function() {
-  // we're connected!
-    console.log("db connected");
-  });
-
-  var testSchema = mongoose.Schema({
-    count: {type:Number, default: 0},
-    data: [{type:Number, default: 0}, {content: String}]
-  });
-  var testModel = mongoose.model('jksTest', testSchema);
+testFunction = function(){
+    alert("this.testModel.data");
 };
 
-boardApi.testFunction = function(){
-    alert("this.testModel.data");
-}
-
-boardApi.getBoardList = function() {
+getBoardList = function() {
     var jsonData = {};
+    $.ajax({
+        url:'./users',
+        type:'get',
+        success:function(data){
+          jsonData = data;
+          console.log(data);
+        }
+    })
     return jsonData;
-}
+};
