@@ -4,20 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <script type="text/javascript" src="assets/js/boardApi.js"></script>
   <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-  <script type="text/javascript" language="javascript">
-    function testFunction(){
-      boardApi.testFunction();
-    }
-  </script>
   <title>Document</title>
 </head>
 <body>
   <div>
     <h2>This is just test....</h2>
     <div>
-      <input type="button" width=200 height=50 id="testbutton" onclick="getBoardList()" value="boardApi_testFunction">
+
+      <!-- loop -->
+      <%if(contents.length>0){%>
+        <%var i = 0;%>
+        <%contents.forEach(function(item){%>
+        <%i++;%>
+        <tr>
+            <td class="number"><%=i%></td>
+            <td class="title"><a href="/boards/view?id=<%=item._id%>"><%=item.title%></a></td>
+            <td class="writer"><%=item.writer%></td>
+            <td class="date"><%=item.date%></td>
+        </tr>
+        <%})%>
+        <%}
+      else {%>
+        <tr>
+            <td colspan="5">게시물이 없습니다.</td>
+        </tr>
+      <%}%>
+
+      <!-- <input type="button" width=200 height=50 id="testbutton" onclick="getBoardList()" value="boardApi_testFunction"> -->
+
     </div>
   </div>
 </body>

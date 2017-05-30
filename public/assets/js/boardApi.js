@@ -27,7 +27,7 @@ testFunction = function(){
 getBoardList = function() {
     var jsonData = {};
     $.ajax({
-        url:'./users',
+        url:'./boardList',
         type:'get',
         success:function(data){
           jsonData = data;
