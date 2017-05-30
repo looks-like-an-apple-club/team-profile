@@ -16,6 +16,7 @@
     <link href='https://fonts.googleapis.com/css?family=Cambo|Poppins:400,600' rel='stylesheet' type='text/css'>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/fonts/pe-icon-7-stroke.css" rel="stylesheet">
+    <link href="assets/css/modal.css" rel="stylesheet">
 </head>
 
 <body>
@@ -38,8 +39,37 @@
                 <ul class="nav navbar-nav navbar-right navbar-uppercase">
                     <li>
                       <!-- <a href="http://www.creative-tim.com/product/gaia-bootstrap-template-pro" target="_blank">회원가입</a> -->
-                      <a>회원가입</a>
+                        <a id="signUpBtn" style="cursor:pointer">회원가입</a>
+                        <div id="signUpModal" class="modal">
+
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <form action="/signUp" method="post">
+                                    <p>ID           :
+                                        <input type="text" name="Id">
+                                        <br/>
+                                    </p>
+                                    <p>
+                                        Password:
+                                        <input type="password" name="Password">
+                                        <br/>
+                                    </p>
+                                    <p>
+                                        Name:
+                                        <input type="text" name="Name">
+                                        <br/>
+
+                                    </p>
+
+                                    <input type="submit" value="SIGNUP">
+                                </form>
+
+                            </div>
+
+                        </div>
                     </li>
+
                     <!-- <li class="dropdown">
                         <a href="#gaia" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-share-alt"></i> Share
@@ -58,10 +88,33 @@
                     </li> -->
                     <li>
                       <!-- <a href="http://www.creative-tim.com/product/gaia-bootstrap-template" class="btn btn-danger btn-fill">로그인</a> -->
-                      <a>로그인</a>
+                      <a id="signInBtn" style="cursor:pointer">로그인</a>
+                        <div id="signInModal" class="modal">
+
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <form action="/signIn" method="post">
+                                    <p>ID           :
+                                        <input type="text" name="Id">
+                                        <br/>
+                                    </p>
+                                    <p>
+                                        Password:
+                                        <input type="password" name="Password">
+                                        <br/>
+                                    </p>
+
+                                    <input type="submit" value="LOGIN">
+                                </form>
+
+                            </div>
+
+                        </div>
                     </li>
                 </ul>
             </div>
+
             <!-- /.navbar-collapse -->
         </div>
     </nav>
@@ -434,5 +487,42 @@
 
 <!--   file where we handle all the script from the Gaia - Bootstrap Template   -->
 <script type="text/javascript" src="assets/js/gaia.js"></script>
+
+<script>
+    var signInModal = document.getElementById('signInModal');
+    var signUpModal = document.getElementById('signUpModal');
+    // Get the button that opens the modal
+    var signInBtn = document.getElementById("signInBtn");
+    var signUpBtn = document.getElementById("signUpBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    signInBtn.onclick = function() {
+        signInModal.style.display = "block";
+    }
+    signUpBtn.onclick = function() {
+        signUpModal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        signInModal.style.display = "none";
+        signUpModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == signInModal) {
+            signInModal.style.display = "none";
+
+        }
+        if (event.target == signUpModal) {
+            signUpModal.style.display = "none";
+
+        }
+    }
+</script>
 
 </html>

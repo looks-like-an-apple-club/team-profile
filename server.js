@@ -2,12 +2,19 @@ var express = require('express');
 var app = express();
 var router = require('./router/main')(app);
 var mongoose = require('mongoose');
+
+
 require('dotenv').config();
+
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
+
+
+
 // mongoose.connect('mongodb://developer:appleclub@ds155411.mlab.com:55411/lookslikeapple');
+
 var options = {
   user: process.env.DB_USER,
   pass: process.env.DB_PASS

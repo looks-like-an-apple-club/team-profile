@@ -41,4 +41,15 @@ module.exports = function(app)
       });
     });
 
+    app.post('/signIn',function(req,res){
+        console.log("test");
+
+        }
+    )
+    app.post('/signUp',function(req,res){
+        console.log("signup");
+    })
+
+
+
 };
