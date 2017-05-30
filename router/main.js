@@ -3,7 +3,7 @@ module.exports = function(app)
     var User = require('../models/user');
 
      app.get('/',function(req,res){
-        res.render('index.html')
+        res.render('index.html');
      });
     //  app.get('/about',function(req,res){
     //     res.render('about.html');
