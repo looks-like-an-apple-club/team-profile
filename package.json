@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/looks-like-an-apple-club/team-profile#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.3",

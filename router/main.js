@@ -1,3 +1,5 @@
+var passport = require('passport');
+
 module.exports = function(app)
 {
     var User = require('../models/user');
@@ -41,15 +43,27 @@ module.exports = function(app)
       });
     });
 
-    app.post('/signIn',function(req,res){
-        console.log("test");
+    app.post('/signIn', passport.authenticate('signin', {
+        failureRedirect: '/profile'
+    }), function (req, res) {
+        res.redirect('/');
+    });
 
-        }
-    )
-    app.post('/signUp',function(req,res){
-        console.log("signup");
+    app.post('/signUp',passport.authenticate('signup', {
+        failureRedirect: '/profile',
+    }), function (req, res) {
+        res.redirect('/');
     })
 
+    app.get('/profile', isLoggedIn, function(req, res, next) {
+        res.render('index', { title: 'You are logged in.' });
+    });
 
-
+    function isLoggedIn(req, res, next) {
+        if (req.isAuthenticated()){
+            return next();
+        } else {
+            console.log("test");
+        }
+    }
 };
