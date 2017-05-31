@@ -1,11 +1,13 @@
 /**
  * Created by Choichanghyun on 2017. 5. 30..
  */
-var passport = require('passport');
+//var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var Users = require('../models/user');
+var bcrypt = require('bcrypt-nodejs');
+var async = require('async');
+var Users = require('../../models/user');
 
-module.exports = function () {
+module.exports = function (passport) {
     passport.serializeUser(function (user, done) {
         done(null, user);
     });
@@ -15,10 +17,13 @@ module.exports = function () {
     });
 
     passport.use('signin',new LocalStrategy({
-        //usernameField: 'id',
+        usernameField: 'id',
+        passwordField: 'password',
+
     }, function(req, id, password, done) {
+        console.log(id);
+        console.log(password);
         Users.findOne({ 'username' : id }, function(err, user) {
-            console.log("sign");
             if (err)
                 return done(err);
             if (!user)
@@ -29,11 +34,13 @@ module.exports = function () {
         });
     }));
     passport.use('signup', new LocalStrategy({
-          //  usernameField : 'id',
-        //    passReqToCallback : true
+            usernameField: 'id',
+            passwordField: 'password',
+            passReqToCallback : true
         },
         function(req, id, password, done) {
-            console.log("sign");
+            console.log(id);
+            console.log(password);
             Users.findOne({ 'username' : id }, function(err, user) {
                 if (err) return done(err);
                 if (user) {
