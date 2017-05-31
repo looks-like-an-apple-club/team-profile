@@ -23,7 +23,17 @@ module.exports = function(app)
       // res.render('boardList.html');
     });
 
-    app.get('/createBoard',function(req,res){
+    app.get('/writeBoard',function(req,res){
+      res.render('boardWrite.html');
+    });
+
+    app.get('/boardList',function(req,res){
+      BoardContent.find({}, function (err, docs) {
+        return res.status(200).send(docs);
+      });
+    });
+
+    app.get('/saveBoard',function(req,res){
       var aNewBoard = BoardContent({
         writer: 'keonsu',
         password: '',
@@ -38,18 +48,6 @@ module.exports = function(app)
         }
         console.log('a new board created!');
       });
-    });
-
-    app.get('/boardList',function(req,res){
-      BoardContent.find({}, function (err, docs) {
-        return res.status(200).send(docs);
-      });
-    });
-
-    app.get('/saveBoard',function(req,res){
-      // BoardContent.find({}, function (err, docs) {
-      //   return res.status(200).send(docs);
-      // });
     });
     //jinkeonsu add end -----
 
