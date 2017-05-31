@@ -84,16 +84,16 @@ module.exports = function(app)
     // });
 
     app.post('/signIn', passport.authenticate('signin', {
-        successRedirect : '/profile',
-        failureRedirect : '/', //로그인 실패시 redirect할 url주소
-        failureFlash : true
-    }));
+        successRedirect:'/',   //
+        failureRedirect:'/profile', // 실패하면 login으로 다시 간다.
+      })
+    );
 
     app.post('/signUp',passport.authenticate('signup', {
-        failureRedirect: '/profile',
-    }), function (req, res) {
-        res.redirect('/');
+        successRedirect:'/',   //
+        failureRedirect:'/profile', // 실패하면 login으로 다시 간다.
     })
+    );
 
     app.get('/profile', isLoggedIn, function(req, res, next) {
         res.render('index', { title: 'You are logged in.' });
