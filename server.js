@@ -6,9 +6,7 @@ var passport = require('passport');
 
 
 var session= require('express-session');
-var pass = require('./config/passport')(passport);
-
-
+require('./router/passport')(passport);
 require('dotenv').config();
 
 

@@ -77,11 +77,17 @@ module.exports = function(app)
       });
     });
 
+    // app.post('/signIn', passport.authenticate('signin', {
+    //     failureRedirect: '/profile'
+    // }), function (req, res) {
+    //     res.redirect('/');
+    // });
+
     app.post('/signIn', passport.authenticate('signin', {
-        failureRedirect: '/profile'
-    }), function (req, res) {
-        res.redirect('/');
-    });
+        successRedirect : '/profile',
+        failureRedirect : '/', //로그인 실패시 redirect할 url주소
+        failureFlash : true
+    }));
 
     app.post('/signUp',passport.authenticate('signup', {
         failureRedirect: '/profile',

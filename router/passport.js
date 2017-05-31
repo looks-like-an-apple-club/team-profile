@@ -1,11 +1,14 @@
 /**
  * Created by Choichanghyun on 2017. 5. 30..
  */
-var passport = require('passport');
+// var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Users = require('../models/user');
 
-module.exports = function () {
+module.exports = function (passport) {
+
+  console.log('passport setting start');
+
     passport.serializeUser(function (user, done) {
         done(null, user);
     });
@@ -15,8 +18,11 @@ module.exports = function () {
     });
 
     passport.use('signin',new LocalStrategy({
-        //usernameField: 'id',
-    }, function(req, id, password, done) {
+              usernameField : 'Id',
+              passwordField : 'Password'
+              },
+      function(req, Id, Password, done) {
+        console.log('asadeafefef');
         Users.findOne({ 'username' : id }, function(err, user) {
             console.log("sign");
             if (err)
