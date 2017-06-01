@@ -1,6 +1,7 @@
 // 게시판 페이지에서 필요한 자바스크립트 함수들 모아 놓음
 // Jin keonsu
 
+// ajax functions...
 getBoardList = function() {
     var jsonData = {};
     $.ajax({
@@ -27,6 +28,10 @@ getCommentList = function() {
           // DOM 조작은 정답은 없지만 이런 식으로 하시면 됩니다. 잘 하고 계시네요.
           // 여러 형태의 샘플을 찾아서 참고하시는 게 도움이 됩니다.
           var theTableBody = document.getElementById('commentbody');
+          while (theTableBody.firstChild) {
+            theTableBody.removeChild(theTableBody.firstChild);
+          }
+
           var comments = data.contents;
 
           if(comments.length>0) {
@@ -71,14 +76,26 @@ saveOneComment = function(writer, comment) {
     var jsonData = {'writer':writer, 'comment':comment};
     $.ajax({
         url:'./boards/saveComment',
-        type:'get',
+        type:'post',
         data: jsonData,
         success:function(data){
           console.log("save one comment success");
+          getCommentList();
           // 생성한 데이터까지 포함해서 리스트에 표현하고 싶으면 여기서 reload를 한번 해주면 되겠죠?
           // getCommentList() 대신 기존에 있던 아이템을 지우고 다시 올리는 형태가 되던지, 아니면 추가된 것만 골라서 add해주던지 해야 겠네요. 직접 부딪치면서 고민해보시지요.
         }
     })
+};
+// ajax function end ....
+
+
+// general functions...
+commentSubmit = function (){
+    var writer = $.trim($("#writer").val());
+    var comment = $.trim($("#comment").val());
+    
+    console.log('===================================writer: ' + writer + ', comment:' +comment );
+    saveOneComment(writer, comment);
 };
 
 // 페이지 처음 진입할 때 최초 로딩 한번 걸어줍니다.
