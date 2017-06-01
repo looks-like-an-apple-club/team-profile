@@ -1,5 +1,6 @@
 // grab the things we need
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 var Schema = mongoose.Schema;
 
 // create a schema
@@ -8,6 +9,22 @@ var userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
 });
+
+userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+//password의 유효성 검증
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password);
+};
+
+userSchema.methods.comparePassword = function comparePassword(inputPassword, cb) {
+    if (inputPassword === this.password) {
+        cb(null, true);
+    } else {
+        cb('error');
+    }
+};
 
 // the schema is useless so far
 // we need to create a model using it
