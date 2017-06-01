@@ -18,3 +18,16 @@ getBoardList = function() {
     })
     return jsonData;
 };
+
+getCommentList = function() {
+    var jsonData = {};
+    $.ajax({
+        url:'./boards/vcomment',
+        type:'get',
+        success:function(data){
+          jsonData = data;
+          console.log(data);
+        }
+    })
+    return jsonData;
+};
