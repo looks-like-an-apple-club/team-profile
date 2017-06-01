@@ -27,6 +27,9 @@ router.get('/createuser-test',function(req,res, next){
 
 router.get('/users-test',function(req,res, next){
     User.find({}, function (err, docs) {
+      if (err) {
+        console.log(err);
+      }
         return res.status(200).send(docs);
     });
 });

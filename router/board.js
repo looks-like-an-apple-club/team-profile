@@ -8,14 +8,14 @@ var router = express.Router();
 // path : /boards/
 // 변경 추천 : '/boards:id' - 하나의 요소만 GET 할 때는 url parameter를 쓰는 형태로 사용합니다.
 router.get('/', function(req, res, next) {
-  // VisitorBook.find({}, function (err, docs) {
-  //     if(err) {
-  //         console.log('get visitor comment list failed');
-  //     }
-  //     console.log(docs);
-  //     res.render('boardList.html', {contents: docs});
-  // });
-    res.render('boardList.html');
+  VisitorBook.find({}, function (err, docs) {
+      if(err) {
+          console.log('get visitor comment list failed');
+      }
+      console.log(docs);
+      res.render('boardList.html', {contents: docs});
+  });
+    // res.render('boardList.html');
 });
 
 // path : '/boards/vcomment'
