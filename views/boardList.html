@@ -7,6 +7,79 @@
 
   <script type="text/javascript" src="assets/js/boardApi.js"></script>
   <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+
+  <style media="screen">
+    #commentbody tr td {
+      align = "center";
+    }
+  </style>
+
+  <script type="text/javascript">
+    function refreshComment() {
+      console.log("refreshComment func start...");
+
+      // var commentData = getCommentList();
+
+      // 테스트용 샘플...
+      var commentData = {'contents': [
+                                      {'comment': 'djflljaf;', 'writer': 'jin', 'date': '2017.06.01 12:34:56'},
+                                      {'comment': '124578;', 'writer': 'keon', 'date': '2017.06.01 12:34:56'},
+                                      {'comment': 'fdjaiu2398748j;', 'writer': 'su', 'date': '2017.06.01 12:34:56'}
+                                    ]};
+      // 테스트용 샘플...
+
+      console.log(JSON.stringify(commentData));
+
+      var theTableBody = document.getElementById('commentbody');
+      var data = commentData.contents;
+
+      if(data.length>0) {
+        for(var i in data) {
+          var theTr = document.createElement('tr');
+          var theTd1 = document.createElement('td');
+          var theTd2 = document.createElement('td');
+          var theTd3 = document.createElement('td');
+          var theTd4 = document.createElement('td');
+          var theText1 = document.createTextNode(i.toString());
+          var theText2 = document.createTextNode(data[i].comment);
+          var theText3 = document.createTextNode(data[i].writer);
+          var theText4 = document.createTextNode(data[i].date);
+
+          theTd1.appendChild(theText1);
+          theTd2.appendChild(theText2);
+          theTd3.appendChild(theText3);
+          theTd4.appendChild(theText4);
+
+          theTr.appendChild(theTd1);
+          theTr.appendChild(theTd2);
+          theTr.appendChild(theTd3);
+          theTr.appendChild(theTd4);
+          theTableBody.appendChild(theTr);
+        }
+      }
+      else {
+        var theTr = document.createElement('tr');
+        var theTd = document.createElement('td');
+        var theText = document.createTextNode('No data');
+
+        theTd.appendChild(theText);
+        theTr.appendChild(theTd);
+        theTableBody.appendChild(theTr);
+      }
+    };
+
+    $( document ).ready(function() {
+      refreshComment();
+    });
+
+    // function commentSave(){
+    //   var writer = document.getElementById('writer').value;
+    //   var comment = document.getElementById('comment').value;
+    //
+    //   saveOneComment(writer, comment);
+    // };
+
+  </script>
   <title>Document</title>
 </head>
 <body>
@@ -22,23 +95,8 @@
               <th width="100">Date</th>
             </tr>
           </thead>
-          <tbody>
-            <%if(contents.length>0){%>
-              <%var i = 0;%>
-              <%contents.forEach(function(item){%>
-              <%i++;%>
-              <tr>
-                  <td align="center"><%=i%></td>
-                  <td align="center"><%=item.comment%></td>
-                  <td align="center"><%=item.writer%></td>
-                  <td align="center"><%=item.date%></td>
-              </tr>
-              <%})%>
-            <%} else {%>
-              <tr>
-                  <td colspan="4">게시물이 없습니다.</td>
-              </tr>
-            <%}%>
+          <tbody id="commentbody">
+
           </tbody>
           <tfoot>
           </tfoot>
