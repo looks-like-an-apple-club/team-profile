@@ -18,14 +18,14 @@
     function refreshComment() {
       console.log("refreshComment func start...");
 
-      // var commentData = getCommentList();
+      var commentData = getCommentList();
 
       // 테스트용 샘플...
-      var commentData = {'contents': [
-                                      {'comment': 'djflljaf;', 'writer': 'jin', 'date': '2017.06.01 12:34:56'},
-                                      {'comment': '124578;', 'writer': 'keon', 'date': '2017.06.01 12:34:56'},
-                                      {'comment': 'fdjaiu2398748j;', 'writer': 'su', 'date': '2017.06.01 12:34:56'}
-                                    ]};
+      // var commentData = {'contents': [
+      //                                 {'comment': 'djflljaf;', 'writer': 'jin', 'date': '2017.06.01 12:34:56'},
+      //                                 {'comment': '124578;', 'writer': 'keon', 'date': '2017.06.01 12:34:56'},
+      //                                 {'comment': 'fdjaiu2398748j;', 'writer': 'su', 'date': '2017.06.01 12:34:56'}
+      //                               ]};
       // 테스트용 샘플...
 
       console.log(JSON.stringify(commentData));
@@ -69,7 +69,7 @@
     };
 
     $( document ).ready(function() {
-      refreshComment();
+      // refreshComment();
     });
 
     // function commentSave(){
@@ -96,7 +96,22 @@
             </tr>
           </thead>
           <tbody id="commentbody">
-
+            <%if(contents.length>0){%>
+            <%var i = 0;%>
+            <%contents.forEach(function(item){%>
+            <%i++;%>
+            <tr>
+                <td align="center"><%=i%></td>
+                <td align="center"><%=item.comment%></td>
+                <td align="center"><%=item.writer%></td>
+                <td align="center"><%=item.date%></td>
+            </tr>
+            <%})%>
+            <%} else {%>
+            <tr>
+                <td colspan="4">게시물이 없습니다.</td>
+            </tr>
+            <%}%>
           </tbody>
           <tfoot>
           </tfoot>
