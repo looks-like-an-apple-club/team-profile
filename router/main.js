@@ -3,11 +3,7 @@ var passport = require('passport');
 module.exports = function(app)
 {
     var User = require('../models/user');
-    var BoardContent = require('../models/boardSchema');
 
-    app.get('/',function(req,res){
-        res.render('index.html')
-     });
     //  app.get('/about',function(req,res){
     //     res.render('about.html');
     // });

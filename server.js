@@ -1,28 +1,23 @@
 var express = require('express');
-var app = express();
-var router = require('./router/main')(app);
 var mongoose = require('mongoose');
 var passport = require('passport');
-
-
 var session= require('express-session');
 require('./router/config/passport')(passport);
 require('dotenv').config();
-
+var index = require('./router/index');
+var user = require('./router/user');
+var board = require('./router/board');
+var app = express();
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
-
 
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true
 }));
-
-
-// mongoose.connect('mongodb://developer:appleclub@ds155411.mlab.com:55411/lookslikeapple');
 
 var options = {
   user: process.env.DB_USER,
@@ -34,11 +29,16 @@ mongoose.connect('mongodb://ds155411.mlab.com:55411/lookslikeapple', options, fu
         console.error('mongodb connection error', err);
       }
     });
+
+// 여기서 상위 경로 routing을 하므로 각 router controller에서는 하위 경로부터 지정하시면 됩니다.
+app.use('/', index);
+app.use('/users', user);
+app.use('/boards', board);
+app.use(passport.initialize());
+app.use(passport.session()); //로그인 세션 유지
+
 var server = app.listen(3000, function(){
     console.log("Express server has started on port 3000")
 });
-
-app.use(passport.initialize());
-app.use(passport.session()); //로그인 세션 유지
 
 app.use(express.static('public'));

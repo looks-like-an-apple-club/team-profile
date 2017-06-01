@@ -9,7 +9,7 @@ testFunction = function(){
 getBoardList = function() {
     var jsonData = {};
     $.ajax({
-        url:'./boardList',
+        url:'./boards/list',
         type:'get',
         success:function(data){
           jsonData = data;
