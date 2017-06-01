@@ -4,17 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  <script type="text/javascript" src="assets/js/boardApi.js"></script>
-  <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-
   <style media="screen">
     #commentbody tr td {
       align = "center";
     }
   </style>
 
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
+  // 이 위치에 있는 코드들을 boardApi.js 파일로 옮기세요.
     function refreshComment() {
       console.log("refreshComment func start...");
 
@@ -30,6 +27,8 @@
 
       console.log(JSON.stringify(commentData));
 
+      // DOM 조작은 정답은 없지만 이런 식으로 하시면 됩니다. 잘 하고 계시네요.
+      // 여러 형태의 샘플을 찾아서 참고하시는 게 도움이 됩니다.
       var theTableBody = document.getElementById('commentbody');
       var data = commentData.contents;
 
@@ -77,7 +76,7 @@
     //   var comment = document.getElementById('comment').value;
     //
     //   saveOneComment(writer, comment);
-    // };
+    // };-->
 
   </script>
   <title>Document</title>
@@ -112,5 +111,7 @@
       </div>
     </center>
   </div>
+  <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/boardApi.js"></script>
 </body>
 </html>
