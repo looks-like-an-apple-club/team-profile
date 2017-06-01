@@ -7,7 +7,7 @@ var Users = require('../../models/user');
 
 module.exports = function (passport) {
 
-  console.log('passport setting start');
+  // console.log('passport setting start');
 
     passport.serializeUser(function (user, done) {
         done(null, user);
@@ -17,23 +17,20 @@ module.exports = function (passport) {
         done(null, user);
     });
 
-    passport.use('signin',new LocalStrategy({
-              usernameField : 'Id',
-              passwordField : 'Password'
-              },
-      function(req, Id, Password, done) {
-        console.log('asadeafefef');
-        Users.findOne({ 'username' : id }, function(err, user) {
-            console.log("sign");
-            if (err)
-                return done(err);
-            if (!user)
-                return done(null, false, req.flash('loginMessage', '사용자를 찾을 수 없습니다.'));
-            if (!user.validPassword(password))
-                return done(null, false, req.flash('loginMessage', '비밀번호가 다릅니다.'));
-            return done(null, user);
-        });
-    }));
+    passport.use('local-signin', new LocalStrategy(
+        function(username, password, done) {
+            Users.findOne({ 'username' : username }, function(err, user) {
+                if (err)
+                    return done(err);
+                if (!user)
+                    return done(null, false, req.flash('loginMessage', '사용자를 찾을 수 없습니다.'));
+                if (!user.validPassword(password))
+                    return done(null, false, req.flash('loginMessage', '비밀번호가 다릅니다.'));
+                return done(null, user);
+            });
+        }));
+
+
     passport.use('signup', new LocalStrategy({
           //  usernameField : 'id',
         //    passReqToCallback : true

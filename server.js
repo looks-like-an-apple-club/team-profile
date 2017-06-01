@@ -2,7 +2,8 @@ var express = require('express');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var session= require('express-session');
-require('./router/config/passport')(passport);
+var flash    = require('connect-flash');
+var bodyParser = require('body-parser');
 require('dotenv').config();
 var index = require('./router/index');
 var user = require('./router/user');
@@ -18,6 +19,12 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
+app.use(passport.session()); //로그인 세션 유지
+app.use(flash()); // use connect-flash for flash messages stored in session
+require('./router/config/passport')(passport);
 
 var options = {
   user: process.env.DB_USER,
@@ -34,8 +41,7 @@ mongoose.connect('mongodb://ds155411.mlab.com:55411/lookslikeapple', options, fu
 app.use('/', index);
 app.use('/users', user);
 app.use('/boards', board);
-app.use(passport.initialize());
-app.use(passport.session()); //로그인 세션 유지
+
 
 var server = app.listen(3000, function(){
     console.log("Express server has started on port 3000")
