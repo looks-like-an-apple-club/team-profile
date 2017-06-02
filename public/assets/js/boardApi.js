@@ -93,9 +93,12 @@ saveOneComment = function(writer, comment) {
 commentSubmit = function (){
     var writer = $.trim($("#writer").val());
     var comment = $.trim($("#comment").val());
-    
+
     console.log('===================================writer: ' + writer + ', comment:' +comment );
     saveOneComment(writer, comment);
+
+    $("#writer").val('');
+    $("#comment").val('');
 };
 
 // 페이지 처음 진입할 때 최초 로딩 한번 걸어줍니다.
