@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var passport = require('passport');
+var session= require('express-session');
+var flash    = require('connect-flash');
+
 var ejs = require('ejs');
 
 /* GET main page. */
@@ -31,9 +34,25 @@ router.post('/signUp',passport.authenticate('signup', {
 
 router.get('/userProfile',isLoggedIn, function(req, res, next) {
     var name = req.user.name;
-    res.render('index', { 'welcome': name + "님 환영합니다 "});
+    req.session.user_id= req.user.username;
+    req.session.name = req.user.name;
+    //console.log(loginstate);
+    res.render('index', { 'welcome': name + "님 환영합니다 ", "session": req.session.user_id});
 });
 
+router.get('/userinfo', function(req,res){
+    res.render('userProfile', {
+        'userid':req.session.user_id, "username": req.session.name
+    });
+})
+router.get('/logout', logout);
+
+function logout(req,res){
+    req.session.destroy(function (err) {
+        res.render('index',{welcome:"", session:""}); //Inside a callback… bulletproof!
+    });
+
+}
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()){
         return next();

@@ -3,6 +3,9 @@
  */
 // var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var session  = require('express-session');
+var flash    = require('connect-flash');
+
 var Users = require('../../models/user');
 
 module.exports = function (passport) {

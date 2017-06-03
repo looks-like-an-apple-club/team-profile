@@ -11,6 +11,7 @@ var index = require('./router/index');
 var user = require('./router/user');
 var board = require('./router/board');
 
+
 var app = express();
 
 app.set('views', __dirname + '/views');
@@ -18,9 +19,14 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 app.use(session({
+    key:'sid',
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 1000 * 60 * 60 // 쿠키 유효기간 1시간
+    }
+
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -1,4 +1,6 @@
 var passport = require('passport');
+var session= require('express-session');
+var flash    = require('connect-flash');
 
 module.exports = function(app)
 {
@@ -77,6 +79,7 @@ module.exports = function(app)
         return res.status(200).send(docs);
       });
     });
+
 
 
 
