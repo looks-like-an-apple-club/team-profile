@@ -16,10 +16,9 @@ module.exports = function (passport) {
         done(null, user);
     });
 
-    passport.use('signin',new LocalStrategy({
-        usernameField: 'id',
-        passwordField: 'password',
-
+    passport.use('sign_in',new LocalStrategy({
+        usernameField: 'Id',
+        passwordField: 'Password',
     }, function(req, id, password, done) {
         console.log(id);
         console.log(password);
@@ -33,9 +32,9 @@ module.exports = function (passport) {
             return done(null, user);
         });
     }));
-    passport.use('signup', new LocalStrategy({
-            usernameField: 'id',
-            passwordField: 'password',
+    passport.use('sign_up', new LocalStrategy({
+            usernameField: 'Id',
+            passwordField: 'Password',
             passReqToCallback : true
         },
         function(req, id, password, done) {

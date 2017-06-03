@@ -77,15 +77,15 @@ module.exports = function(app)
       });
     });
 
-    app.post('/signIn', passport.authenticate('signin', {
+    app.post('/signIn', passport.authenticate('sign_in', {
         successRedirect:'/',   //
         failureRedirect:'/profile', // 실패하면 login으로 다시 간다.
     })
     );
 
-    app.post('/signUp',passport.authenticate('signup', {
+    app.post('/signUp',passport.authenticate('sign_up', {
         successRedirect:'/',   //
-        failureRedirect:'/profile', // 실패하면 login으로 다시 간다.
+        failureRedirect:'/profile' // 실패하면 login으로 다시 간다.
     })
     );
 
