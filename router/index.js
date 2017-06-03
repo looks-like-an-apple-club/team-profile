@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var ejs = require('ejs');
 
 /* GET main page. */
 router.get('/', function(req, res, next) {
-    res.render('index.html');
+    res.render('index.ejs', {welcome: ""});
 });
 
 // 여기서부터 샘플입니다. 테스트 용도로만 사용하세요.

@@ -3,11 +3,14 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var session= require('express-session');
 var flash    = require('connect-flash');
+var ejs = require('ejs');
 var bodyParser = require('body-parser');
+
 require('dotenv').config();
 var index = require('./router/index');
 var user = require('./router/user');
 var board = require('./router/board');
+
 var app = express();
 
 app.set('views', __dirname + '/views');

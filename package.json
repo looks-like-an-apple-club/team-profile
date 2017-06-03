@@ -24,14 +24,9 @@
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
-<<<<<<< HEAD
-    "mongoose": "^4.10.4",
-    "passport": "^0.3.2"
-=======
     "express-session": "^1.15.3",
     "mongoose": "^4.10.4",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0"
->>>>>>> 8694eb8355b5404d581a573abe7ea7b75b2a6869
   }
 }

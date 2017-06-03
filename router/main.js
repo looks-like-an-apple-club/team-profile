@@ -6,7 +6,7 @@ module.exports = function(app)
     var BoardContent = require('../models/boardSchema');
 
     app.get('/',function(req,res){
-        res.render('index.html')
+        res.render('index.ejs',{welcome:""})
      });
     //  app.get('/about',function(req,res){
     //     res.render('about.html');
@@ -28,6 +28,7 @@ module.exports = function(app)
     app.get('/writeBoard',function(req,res){
       res.render('boardWrite.html');
     });
+
 
     app.get('/boardList',function(req,res){
       BoardContent.find({}, function (err, docs) {
@@ -77,27 +78,6 @@ module.exports = function(app)
       });
     });
 
-    app.post('/signIn', passport.authenticate('sign_in', {
-        successRedirect:'/',   //
-        failureRedirect:'/profile', // 실패하면 login으로 다시 간다.
-    })
-    );
 
-    app.post('/signUp',passport.authenticate('sign_up', {
-        successRedirect:'/',   //
-        failureRedirect:'/profile' // 실패하면 login으로 다시 간다.
-    })
-    );
 
-    app.get('/profile', isLoggedIn, function(req, res, next) {
-        res.render('index', { title: 'You are logged in.' });
-    });
-
-    function isLoggedIn(req, res, next) {
-        if (req.isAuthenticated()){
-            return next();
-        } else {
-            console.log("test");
-        }
-    }
 };
