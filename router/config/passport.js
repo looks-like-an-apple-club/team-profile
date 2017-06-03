@@ -1,13 +1,14 @@
 /**
  * Created by Choichanghyun on 2017. 5. 30..
  */
-//var passport = require('passport');
+// var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var bcrypt = require('bcrypt-nodejs');
-var async = require('async');
 var Users = require('../../models/user');
 
 module.exports = function (passport) {
+
+  // console.log('passport setting start');
+
     passport.serializeUser(function (user, done) {
         done(null, user);
     });
@@ -16,6 +17,7 @@ module.exports = function (passport) {
         done(null, user);
     });
 
+<<<<<<< HEAD
     passport.use('sign_in',new LocalStrategy({
         usernameField: 'Id',
         passwordField: 'Password',
@@ -36,10 +38,28 @@ module.exports = function (passport) {
             usernameField: 'Id',
             passwordField: 'Password',
             passReqToCallback : true
+=======
+    passport.use('local-signin', new LocalStrategy(
+        function(username, password, done) {
+            Users.findOne({ 'username' : username }, function(err, user) {
+                if (err)
+                    return done(err);
+                if (!user)
+                    return done(null, false, req.flash('loginMessage', '사용자를 찾을 수 없습니다.'));
+                if (!user.validPassword(password))
+                    return done(null, false, req.flash('loginMessage', '비밀번호가 다릅니다.'));
+                return done(null, user);
+            });
+        }));
+
+
+    passport.use('signup', new LocalStrategy({
+          //  usernameField : 'id',
+        //    passReqToCallback : true
+>>>>>>> 8694eb8355b5404d581a573abe7ea7b75b2a6869
         },
         function(req, id, password, done) {
-            console.log(id);
-            console.log(password);
+            console.log("sign");
             Users.findOne({ 'username' : id }, function(err, user) {
                 if (err) return done(err);
                 if (user) {
