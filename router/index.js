@@ -5,7 +5,11 @@ var ejs = require('ejs');
 
 /* GET main page. */
 router.get('/', function(req, res, next) {
-    res.render('index.ejs', {welcome: "" , session: ""});
+    res.render('index.ejs', {welcome: "" , session: "" ,
+        inmessage: req.flash('loginMessage')[0],
+        upmessage: req.flash('signupMessage')[0]
+    });
+
 });
 
 // 여기서부터 샘플입니다. 테스트 용도로만 사용하세요.

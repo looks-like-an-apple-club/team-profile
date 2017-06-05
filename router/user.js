@@ -21,6 +21,7 @@ router.get('/', function(req, res, next) {
 router.post('/signIn',passport.authenticate('signin', {
         successRedirect:'/users/userProfile',   //
         failureRedirect:'/', // 실패하면 login으로 다시 간다.
+        badRequestMessage : 'Missing username or password.',
         failureFlash : true // allow flash messages
        })
 );
@@ -29,6 +30,8 @@ router.post('/signIn',passport.authenticate('signin', {
 router.post('/signUp',passport.authenticate('signup', {
         successRedirect:'/users/userProfile',   //
         failureRedirect:'/', // 실패하면 login으로 다시 간다.
+        badRequestMessage : 'Missing username or password.',
+        failureFlash : true // allow flash messages
     })
 );
 
@@ -37,7 +40,10 @@ router.get('/userProfile',isLoggedIn, function(req, res, next) {
     req.session.user_id= req.user.username;
     req.session.name = req.user.name;
     //console.log(loginstate);
-    res.render('index', { 'welcome': name + "님 환영합니다 ", "session": req.session.user_id});
+    res.render('index', { 'welcome': name + "님 환영합니다 ", "session": req.session.user_id,
+        inmessage: "",
+        upmessage: ""
+    });
 });
 
 router.get('/userinfo', function(req,res){
@@ -49,7 +55,10 @@ router.get('/logout', logout);
 
 function logout(req,res){
     req.session.destroy(function (err) {
-        res.render('index',{welcome:"", session:""}); //Inside a callback… bulletproof!
+        res.render('index',{welcome:"", session:"",
+            inmessage: "",
+            upmessage: ""
+        }); //Inside a callback… bulletproof!
     });
 
 }
