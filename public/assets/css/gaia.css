@@ -330,6 +330,7 @@ body > .navbar-collapse a {
 
 .info-icon {
   text-align: center;
+  cursor: pointer;
 }
 .info-icon .icon {
   font-size: 62px;
