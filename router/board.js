@@ -34,8 +34,9 @@ router.get('/vcomment', function(req, res, next) {
 router.post('/saveComment', function(req, res){
     // var curDateTime = new Date();
     // var strDateTime = curDateTime.toLocaleDateString() + " " + curDateTime.toLocaleTimeString();
+    console.log(req.user);
     var aNewComment = VisitorBook({
-          writer: req.body.writer,
+          writer: req.user.name,
           comment: req.body.comment,
           date: Date()
     });

@@ -1954,6 +1954,7 @@ a,
   text-align: center;
   margin-bottom: 20px;
   cursor: pointer;
+  min-height: 340px;
 }
 .card-member .content {
   padding: 25px;
@@ -3776,4 +3777,3 @@ tbody td {
 tfoot th {
   text-align: right;
 }
-

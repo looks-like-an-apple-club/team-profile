@@ -72,8 +72,8 @@ getCommentList = function() {
     return null;
 };
 
-saveOneComment = function(writer, comment) {
-    var jsonData = {'writer':writer, 'comment':comment};
+saveOneComment = function(comment) {
+    var jsonData = {'comment':comment};
     $.ajax({
         url:'./boards/saveComment',
         type:'post',
@@ -91,13 +91,13 @@ saveOneComment = function(writer, comment) {
 
 // general functions...
 commentSubmit = function (){
-    var writer = $.trim($("#writer").val());
+    // var writer = $.trim($("#writer").val());
     var comment = $.trim($("#comment").val());
 
-    console.log('===================================writer: ' + writer + ', comment:' +comment );
-    saveOneComment(writer, comment);
+    // console.log('===================================writer: ' + writer + ', comment:' +comment );
+    saveOneComment(comment);
 
-    $("#writer").val('');
+    // $("#writer").val('');
     $("#comment").val('');
 };
 

@@ -343,18 +343,22 @@
                             </tfoot>
                         </table>
                     </div>
+                    <%
+                        if ( session){
+                    %>
                     <br><br>
                     <div>
                         <form class="" action="/boards/saveComment" method="post">
-                            <div class="input-group" style="display: flex;">
+                            <!-- <div class="input-group" style="display: flex;">
                                 <input type="text" name="writer" id="writer" placeholder="Writer">
-                            </div>
+                            </div> -->
                             <div class="input-group">
                                 <textarea class="form-control custom-control" name="comment" id="comment" rows="3" style="resize:none" placeholder="Comment"></textarea>
                                 <span class="input-group-addon btn btn-primary" id="submitMyForm" value="Reigster" onclick="commentSubmit()">Send</span>
                             </div>
                         </form>
                     </div>
+                    <% }%>
                 </center>
             </div>
         </div>

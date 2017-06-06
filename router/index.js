@@ -5,7 +5,15 @@ var ejs = require('ejs');
 
 /* GET main page. */
 router.get('/', function(req, res, next) {
-    res.render('index.ejs', {welcome: "" , session: "" ,
+
+    var name = '';
+    var session = '';
+    if(req.user){
+        name = req.user.name + "님 환영합니다 ";
+        session = req.user.username;
+    }
+
+    res.render('index.ejs', {'welcome': name, "session": session,
         inmessage: req.flash('loginMessage')[0],
         upmessage: req.flash('signupMessage')[0]
     });
