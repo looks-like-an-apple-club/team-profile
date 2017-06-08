@@ -44,7 +44,13 @@ getCommentList = function() {
               var theText1 = document.createTextNode(i.toString());
               var theText2 = document.createTextNode(comments[i].comment);
               var theText3 = document.createTextNode(comments[i].writer);
-              var theText4 = document.createTextNode(comments[i].date);
+
+              var theDateTime = new Date(comments[i].date);
+              // var strDateTime = theDateTime.toLocaleDateString() + " " + theDateTime.toLocaleTimeString();
+              var strDateTime = getDateTimeString(theDateTime);
+
+              var theText4 =  document.createTextNode(strDateTime);
+              // var theText4 = document.createTextNode(theDateTime);
 
               theTd1.appendChild(theText1);
               theTd2.appendChild(theText2);

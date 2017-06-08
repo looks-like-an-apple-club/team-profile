@@ -1,6 +1,7 @@
 var BoardContent = require('../models/boardSchema');
 var VisitorBook = require('../models/visitorBook');
 
+
 var express = require('express');
 var router = express.Router();
 
@@ -50,34 +51,6 @@ router.post('/saveComment', function(req, res){
 });
 
 
-//--------------------------------------------------------------//
-// test block begin
-// path : /boards/write
-router.get('/write', function(req, res, next) {
-    res.render('boardWrite.html');
-});
-
-
-// path : '/boards/save'
-// 변경 추천 : '/boards' POST - POST가 저장의 의미를 이미 가지고 있으므로 save 같은 표현은 쓰지 않는 게 좋습니다.
-router.get('/save', function(req, res, next) {
-    var aNewBoard = BoardContent({
-        writer: 'keonsuadf',
-        password: '',
-        title: 'First Report',
-        contents: 'this is fakljdfkjalkjreo[iqwuroiuvnlajfcontent, this is content, this is content',
-        date: Date(),
-        deleted: false
-    });
-    aNewBoard.save(function(err){
-        if (err) {
-            return res.status(500).send(err);
-        }
-        console.log('a new board created!');
-    });
-});
-//--------------------------------------------------------------//
-// test block end
 
 
 module.exports = router;
