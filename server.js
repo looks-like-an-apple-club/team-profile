@@ -40,9 +40,11 @@ var options = {
   pass: process.env.DB_PASS
 };
 mongoose.connect('mongodb://ds155411.mlab.com:55411/lookslikeapple', options, function(err) {
-      console.log('mongodb connected');
       if (err) {
         console.error('mongodb connection error', err);
+      }
+      else {
+        console.log('mongodb connected');
       }
     });
 
